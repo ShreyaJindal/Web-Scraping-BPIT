@@ -76,7 +76,7 @@ function process(branch,name,qual,email,exp,research,public,inter)
         International_Publication: inter,
     }
     
-    //name=name.split("").join("");
+    
     if(fs.existsSync(dirPath))
     {
         // file check
@@ -92,7 +92,7 @@ function process(branch,name,qual,email,exp,research,public,inter)
     //create file
     let FilePath=path.join(dirPath,name+".xlsx");
     let pData=[];
-
+    name=name.substring(0,31);
     if (fs.existsSync(FilePath))
     {
         pData=excelReader(FilePath,name);
@@ -104,9 +104,10 @@ function process(branch,name,qual,email,exp,research,public,inter)
         console.log("File",FilePath,"created");
         pData=[pStats];
     }
+    
+    
     excelWriter(FilePath,pData,name);
-    
-    
+
 
     /*Read Excel file*/
     function excelReader(filePath,name)
@@ -135,7 +136,6 @@ function process(branch,name,qual,email,exp,research,public,inter)
     /*Write Excel file*/
     function excelWriter(filePath,json,name)
     {
-        name=name.split("").join("");
         //console.log(xlsx.readFile(filePath));
         let newWB=xlsx.utils.book_new();
         //console.log(json);
